@@ -93,7 +93,7 @@ export function useActions(state: State, nodeLookup: ComputedRef<NodeLookup>, ed
     return edgeLookup.value.get(id)
   }
 
-  const updateNodePositions: Actions['updateNodePositions'] = (dragItems, changed, dragging) => {
+  const updateNodePositions: Actions['updateNodePositions'] = (dragItems, changed, dragging, skipTrigger = false) => {
     const changes: NodePositionChange[] = []
 
     for (const node of dragItems) {
@@ -120,7 +120,7 @@ export function useActions(state: State, nodeLookup: ComputedRef<NodeLookup>, ed
       changes.push(change as NodePositionChange)
     }
 
-    if (changes?.length) {
+    if (changes?.length && !skipTrigger) {
       state.hooks.nodesChange.trigger(changes)
     }
   }

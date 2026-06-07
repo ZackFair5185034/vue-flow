@@ -111,7 +111,7 @@ export function useDrag(params: UseDragParams) {
       return
     }
 
-    updateNodePositions(dragItems, true, true)
+    updateNodePositions(dragItems, true, true, true) // skipTrigger=true: 拖拽过程中跳过 nodesChange 触发，避免不必要的 VueFlow 内部更新
 
     dragging.value = true
 
