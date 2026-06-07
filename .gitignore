@@ -70,6 +70,8 @@ typings/
 
 # Nuxt generate
 dist
+# CogniFlow: 允许 packages/core/dist 提交到 git，供 github 依赖直接拉取
+!packages/core/dist
 
 # vuepress build output
 .vuepress/dist
