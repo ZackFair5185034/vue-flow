@@ -8099,6 +8099,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
       emits.selectionStart(event);
     }
     function onPointerMove(event) {
+      var _a;
       if (!containerBounds.value || !userSelectionRect.value) {
         return;
       }
@@ -8113,17 +8114,10 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
         width: Math.abs(mouseX - startX),
         height: Math.abs(mouseY - startY)
       };
-      userSelectionRect.value = nextUserSelectRect;
-      userSelectionActive.value = true;
-      nodesSelectionActive.value = false;
-    }
-    function computeSelectionFromRect(rect) {
-      var _a;
-      if (!rect) return;
       const prevSelectedNodeIds = selectedNodeIds.value;
       const prevSelectedEdgeIds = selectedEdgeIds.value;
       selectedNodeIds.value = new Set(
-        getNodesInside(nodes.value, rect, viewport.value, selectionMode.value === SelectionMode.Partial, true).map(
+        getNodesInside(nodes.value, nextUserSelectRect, viewport.value, selectionMode.value === SelectionMode.Partial, true).map(
           (node) => node.id
         )
       );
@@ -8149,6 +8143,9 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
         const changes = getSelectionChanges(edgeLookup.value, selectedEdgeIds.value);
         emits.edgesChange(changes);
       }
+      userSelectionRect.value = nextUserSelectRect;
+      userSelectionActive.value = true;
+      nodesSelectionActive.value = false;
     }
     function onPointerUp(event) {
       var _a;
@@ -8159,7 +8156,6 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
       if (!userSelectionActive.value && userSelectionRect.value && event.target === container.value) {
         onClick(event);
       }
-      computeSelectionFromRect(userSelectionRect.value);
       userSelectionActive.value = false;
       userSelectionRect.value = null;
       nodesSelectionActive.value = selectedNodeIds.value.size > 0;
