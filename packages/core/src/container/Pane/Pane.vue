@@ -158,7 +158,7 @@ function onPointerMove(event: PointerEvent) {
     x: mouseX < startX ? mouseX : startX,
     y: mouseY < startY ? mouseY : startY,
     width: Math.abs(mouseX - startX),
-    height: Math.abs(mouseY - startY),
+    height: Math.abs(mouseY - startY)
   }
 
   const prevSelectedNodeIds = selectedNodeIds.value

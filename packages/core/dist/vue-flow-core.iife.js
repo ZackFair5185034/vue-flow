@@ -4938,7 +4938,7 @@ Edge: ${id2}`,
       if (!hasChange) {
         return;
       }
-      updateNodePositions(dragItems, true, true);
+      updateNodePositions(dragItems, true, true, true);
       dragging.value = true;
       if (dragEvent) {
         const [currentNode, nodes] = getEventHandlerParams({
